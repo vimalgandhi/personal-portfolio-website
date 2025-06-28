@@ -641,14 +641,14 @@
               <span>2022 — Present</span>
 
               <p class="timeline-text">
-                                <br>
+                <br>
                 🚀 Experienced Software Developer | Crafting Innovative Solutions
                 <br>
                 <br>
                 Greetings! I'm Vimal Gandhi, a results-driven software developer with over 2 years of hands-on
                 experience in the dynamic tech landscape. My passion is delivering cutting-edge solutions that surpass
                 business expectations.
-                <br>                <br>
+                <br> <br>
 
                 🌐 Full Stack Expertise
                 <br>
@@ -657,7 +657,7 @@
                 In my software development journey, I've honed a versatile skill set spanning front-end and back-end
                 technologies. Proficient in HTML, CSS, JavaScript, Node.js, and FastAPI, I ensure a seamless integration
                 from project inception to deployment, guaranteeing efficient and scalable solutions.
-                <br>                <br>
+                <br> <br>
 
                 🛠️ Technical Proficiency
                 <br>
@@ -666,7 +666,7 @@
                 With expertise in JavaScript, TypeScript, React.js, Redux, Python, Jira, Git, GitHub, GitLab, and VS
                 Code, I architect systems that are both scalable and maintainable. My adaptability keeps me at the
                 industry forefront, contributing significantly to project success.
-                <br>                <br>
+                <br> <br>
 
                 🔧 Agile Development Advocate
                 <br>
@@ -675,7 +675,7 @@
                 A staunch believer in Agile methodologies, I emphasize collaboration, adaptability, and frequent
                 delivery of valuable software. My experience in Agile environments has honed my ability to work
                 effectively in cross-functional teams, fostering continuous improvement.
-                <br>                <br>
+                <br> <br>
 
                 📈 Proven Track Record
                 <br>
@@ -684,7 +684,7 @@
                 Throughout my career, I've contributed to diverse projects, including [briefly describe a notable
                 achievement]. This experience underscores my commitment to excellence and my ability to navigate complex
                 challenges.
-                <br>                <br>
+                <br> <br>
 
                 🏆 Looking Forward
                 <br>
@@ -1268,10 +1268,11 @@
             id="contactForm">
             <h3 class="h3 form-title">Contact Form</h3>
             <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
+              <input type="text" name="fullName" class="form-input" placeholder="Full name" required data-form-input>
               <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+              <input type="phoneNumber" name="phoneNumber" class="form-input" placeholder="Phone number" required data-form-input>
             </div>
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
+            <textarea name="comment" class="form-input" placeholder="Your Message" required data-form-input></textarea>
             <button class="form-btn" type="submit" data-form-btn>
               <ion-icon name="paper-plane"></ion-icon>
               <span>Send Message</span>
@@ -1299,7 +1300,7 @@
     - custom js link
   -->
   <script src="./assets/js/script.js"></script>
-  <script>
+  <!-- <script>
     // Select the form and thank you message elements
     const contactForm = document.getElementById('contactForm');
     const thankYouMessage = document.getElementById('thankYouMessage');
@@ -1312,16 +1313,62 @@
       // Log form data (optional)
       const formData = new FormData(contactForm);
       console.log('Form Data:', {
-        fullname: formData.get('fullname'),
+        fullName: formData.get('fullName'),
         email: formData.get('email'),
-        message: formData.get('message'),
+        comment: formData.get('comment'),
       });
 
       // Hide the form and show the thank you message
       contactForm.style.display = 'none';
       thankYouMessage.style.display = 'block';
     });
+  </script> -->
+  <script>
+    const contactForm = document.getElementById('contactForm');
+    const thankYouMessage = document.getElementById('thankYouMessage');
+
+    // Google Apps Script Web App URL
+    const Sheet_Url = 'https://script.google.com/macros/s/AKfycbxVsspkST7jHvZNxEXmpWzniizpKlwLcFjg-v5JUo37Ply30q-sl3nTfiM_iuuokdIenw/exec';
+
+    contactForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(contactForm);
+
+      // Optional: Log form data
+      console.log('Form Data:', {
+        fullName: formData.get('fullName'),
+        email: formData.get('email'),
+        comment: formData.get('comment'),
+      });
+
+      // Prepare URL-encoded data
+      const params = new URLSearchParams();
+      formData.forEach((value, key) => {
+        params.append(key, value);
+      });
+
+      try {
+        const response = await fetch(Sheet_Url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: params,
+        });
+
+        if (!response.ok) throw new Error('Failed to submit form');
+
+        // Hide form, show thank you message
+        contactForm.style.display = 'none';
+        thankYouMessage.style.display = 'block';
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('There was an error. Please try again.');
+      }
+    });
   </script>
+
 
   <!--
     - ionicon link
