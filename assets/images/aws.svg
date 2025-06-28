@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 319" width="32" height="32">
+      <!-- Simple cloud with "AWS" text -->
+      <path fill="#FF9900" d="M150 160c0-44.2 35.8-80 80-80s80 35.8 80 80h80c44.2 0 80 35.8 80 80s-35.8 80-80 80H150c-44.2 0-80-35.8-80-80s35.8-80 80-80z"/>
+      <text x="256" y="200" font-family="Arial, sans-serif" font-size="120" fill="#FFFFFF" text-anchor="middle">AWS</text>
+    </svg>
